@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jjinternational/components/components.dart';
+import 'package:jjinternational/constants/constants.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -7,24 +8,27 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          //TODO: ADD HEADER HERE.
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: Header(
-              size: MediaQuery.sizeOf(context),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: Header(
+                  minExtend: AppConstant.minExtend,
+                  maxExtend: constraints.maxWidth < AppConstant.widthBreakPoint
+                      ? AppConstant.minimizedMaxExtedn
+                      : AppConstant.maxExtend),
             ),
-          ),
-          //TODO: ADD BODY CONTENT HERE.
-          SliverFillRemaining(
-            child: Container(
-              color: Colors.blue,
-              height: 600,
-            ),
-          )
-        ],
-      ),
+            //TODO: ADD BODY CONTENT HERE.
+            SliverFillRemaining(
+              child: Container(
+                color: Colors.blue,
+                height: 600,
+              ),
+            )
+          ],
+        );
+      }),
     );
   }
 }

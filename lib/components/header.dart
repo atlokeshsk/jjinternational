@@ -2,45 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:jjinternational/constants/constants.dart';
 
 class Header extends SliverPersistentHeaderDelegate {
-  Header({required this.size});
-  final Size size;
+  Header({required this.minExtend, required this.maxExtend});
+  final double minExtend;
+  final double maxExtend;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        print(constraints.maxWidth);
+
         /// max height is greater than minExtend return the full header
         if (constraints.maxHeight > minExtent) {
           return Container(
-            color: AppColor.headerBackground,
-            child: Column(
-              children: [
-                // Title section of the header.
-                TitleBar(
-                  displayCompanyInfo:
-                      constraints.maxHeight == maxExtent ? true : false,
-                ),
-                NavBar(
-                  minExtent: minExtent,
-                )
-              ],
+            color: AppConstant.headerBackground,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: Column(
+                children: [
+                  // Title section of the header.
+                  TitleBar(
+                    displayCompanyInfo:
+                        constraints.maxHeight == maxExtent ? true : false,
+                    issmallerScreen: constraints.maxWidth < 1009 ? true : false,
+                  ),
+                  NavBar(
+                    minExtent: minExtent,
+                  )
+                ],
+              ),
             ),
           );
         }
-        //TODO: should return nav bar.
-        return Container(
-          color: Colors.indigo,
+        return const NavBar(
+          reachedTop: true,
         );
       },
     );
   }
 
   @override
-  double get maxExtent => 285;
+  double get maxExtent => maxExtend;
 
   @override
-  double get minExtent => 55;
+  double get minExtent => minExtend;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
@@ -50,41 +56,90 @@ class Header extends SliverPersistentHeaderDelegate {
 
 //TODO: need to find the appropriate name this widget later stage.
 class TitleBar extends StatelessWidget {
-  const TitleBar({super.key, required this.displayCompanyInfo});
+  const TitleBar({
+    super.key,
+    required this.displayCompanyInfo,
+    required this.issmallerScreen,
+  });
   final bool displayCompanyInfo;
+  final bool issmallerScreen;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CompanyInfo(
-            visible: displayCompanyInfo,
-          ),
-          const SizedBox(width: 10),
-          const ContactInfo(
-            title: 'Email',
-            content: 'atlokeshsk@icloud.com',
-            iconData: Icons.email,
-          ),
-          const SizedBox(width: 10),
-          const ContactInfo(
-            title: 'Mobile',
-            content: '+91 6383226912',
-            iconData: Icons.phone,
-          ),
-          const SizedBox(width: 10),
-          const SocialLinks()
-        ],
-      ),
+      child: issmallerScreen
+          ? Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: CompanyInfo(
+                      visible: true,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const ContactInfo(
+                        title: 'Email',
+                        content: 'atlokeshsk@icloud.com',
+                        iconData: Icons.email,
+                      ),
+                      SizedBox(width: 10),
+                      const ContactInfo(
+                        title: 'Mobile',
+                        content: '+91 6383226912',
+                        iconData: Icons.phone,
+                      ),
+                      SizedBox(width: 10),
+                      const SocialLinks()
+                    ],
+                  )
+                ],
+              ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CompanyInfo(
+                  visible: displayCompanyInfo,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                const SizedBox(width: 10),
+                const ContactInfo(
+                  title: 'Email',
+                  content: 'atlokeshsk@icloud.com',
+                  iconData: Icons.email,
+                ),
+                const SizedBox(width: 10),
+                const ContactInfo(
+                  title: 'Mobile',
+                  content: '+91 6383226912',
+                  iconData: Icons.phone,
+                ),
+                const SizedBox(width: 10),
+                const SocialLinks()
+              ],
+            ),
     );
   }
 }
 
 class CompanyInfo extends StatelessWidget {
-  const CompanyInfo({super.key, required this.visible});
+  const CompanyInfo({
+    super.key,
+    required this.visible,
+    required this.crossAxisAlignment,
+    required this.mainAxisAlignment,
+  });
   final bool visible;
+  final CrossAxisAlignment crossAxisAlignment;
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -92,13 +147,14 @@ class CompanyInfo extends StatelessWidget {
     return Visibility.maintain(
       visible: visible,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: crossAxisAlignment,
+        mainAxisAlignment: mainAxisAlignment,
         children: [
           Image.asset(
-            AppImage.logo,
-            height: 150,
+            AppConstant.logo,
+            height: 120,
             width: 75,
+            fit: BoxFit.fill,
           ),
           Text(
             'Cocunt Seller India',
@@ -139,7 +195,7 @@ class ContactInfo extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              border: Border.all(color: AppColor.iconBorder, width: 2),
+              border: Border.all(color: AppConstant.iconBorder, width: 2),
               borderRadius: const BorderRadius.all(Radius.circular(5))),
           child: Icon(
             iconData,
@@ -188,14 +244,51 @@ class SocialLinks extends StatelessWidget {
 
 class NavBar extends StatelessWidget {
   final double? minExtent;
-
-  const NavBar({super.key, this.minExtent});
+  final bool reachedTop;
+  const NavBar({
+    super.key,
+    this.minExtent,
+    this.reachedTop = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: !reachedTop ? BorderRadius.circular(100) : null,
+      ),
       height: minExtent,
+      child: Row(
+        children: [
+          TextButton(
+            onPressed: () {},
+            child: Text('Home'),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text('Products'),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text('Profile'),
+          ),
+          Expanded(child: SizedBox.expand()),
+          // Contact us button
+          SizedBox(
+            height: double.infinity,
+            width: 150,
+            child: FilledButton(
+              onPressed: () {},
+              style: FilledButton.styleFrom(
+                shape: reachedTop ? RoundedRectangleBorder() : null,
+              ),
+              child: Text('Contact Us'),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
