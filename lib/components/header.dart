@@ -2,51 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:jjinternational/constants/constants.dart';
 
 class Header extends SliverPersistentHeaderDelegate {
-  Header({required this.minExtend, required this.maxExtend});
-  final double minExtend;
-  final double maxExtend;
+  Header({required this.minExtent, required this.maxExtent});
+  @override
+  final double minExtent;
+  @override
+  final double maxExtent;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        print(constraints.maxWidth);
-
-        /// max height is greater than minExtend return the full header
-        if (constraints.maxHeight > minExtent) {
-          return Container(
-            color: AppConstant.headerBackground,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 50),
-              child: Column(
-                children: [
-                  // Title section of the header.
-                  TitleBar(
-                    displayCompanyInfo:
-                        constraints.maxHeight == maxExtent ? true : false,
-                    issmallerScreen: constraints.maxWidth < 1009 ? true : false,
+        // Check if the height is greater than the minimum extent
+        return constraints.maxHeight > minExtent
+            ? Container(
+                color: AppConstant.headerBackground,
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1009),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
+                      child: Column(
+                        children: [
+                          TitleBar(
+                            displayCompanyInfo:
+                                constraints.maxHeight == maxExtent,
+                            isSmallerScreen: constraints.maxWidth < 1009,
+                          ),
+                          NavBar(minExtent: minExtent),
+                        ],
+                      ),
+                    ),
                   ),
-                  NavBar(
-                    minExtent: minExtent,
-                  )
-                ],
-              ),
-            ),
-          );
-        }
-        return const NavBar(
-          reachedTop: true,
-        );
+                ),
+              )
+            : const NavBar(
+                reachedTop: true); // Return a minimal NavBar if scrolled up
       },
     );
   }
-
-  @override
-  double get maxExtent => maxExtend;
-
-  @override
-  double get minExtent => minExtend;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
@@ -54,22 +48,22 @@ class Header extends SliverPersistentHeaderDelegate {
   }
 }
 
-//TODO: need to find the appropriate name this widget later stage.
+// Widget for the title bar of the header
 class TitleBar extends StatelessWidget {
   const TitleBar({
     super.key,
     required this.displayCompanyInfo,
-    required this.issmallerScreen,
+    required this.isSmallerScreen,
   });
   final bool displayCompanyInfo;
-  final bool issmallerScreen;
+  final bool isSmallerScreen;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: issmallerScreen
-          ? Padding(
-              padding: const EdgeInsets.all(16.0),
+      child: isSmallerScreen
+          ? const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -84,21 +78,21 @@ class TitleBar extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const ContactInfo(
+                      ContactInfo(
                         title: 'Email',
                         content: 'atlokeshsk@icloud.com',
                         iconData: Icons.email,
                       ),
                       SizedBox(width: 10),
-                      const ContactInfo(
+                      ContactInfo(
                         title: 'Mobile',
                         content: '+91 6383226912',
                         iconData: Icons.phone,
                       ),
                       SizedBox(width: 10),
-                      const SocialLinks()
+                      SocialLinks(),
                     ],
-                  )
+                  ),
                 ],
               ),
             )
@@ -123,13 +117,14 @@ class TitleBar extends StatelessWidget {
                   iconData: Icons.phone,
                 ),
                 const SizedBox(width: 10),
-                const SocialLinks()
+                const SocialLinks(),
               ],
             ),
     );
   }
 }
 
+// Widget for displaying company information
 class CompanyInfo extends StatelessWidget {
   const CompanyInfo({
     super.key,
@@ -176,6 +171,7 @@ class CompanyInfo extends StatelessWidget {
   }
 }
 
+// Widget for displaying contact information
 class ContactInfo extends StatelessWidget {
   const ContactInfo({
     super.key,
@@ -195,8 +191,9 @@ class ContactInfo extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-              border: Border.all(color: AppConstant.iconBorder, width: 2),
-              borderRadius: const BorderRadius.all(Radius.circular(5))),
+            border: Border.all(color: AppConstant.iconBorder, width: 2),
+            borderRadius: const BorderRadius.all(Radius.circular(5)),
+          ),
           child: Icon(
             iconData,
             color: Colors.green,
@@ -224,6 +221,7 @@ class ContactInfo extends StatelessWidget {
   }
 }
 
+// Widget for displaying social media links
 class SocialLinks extends StatelessWidget {
   const SocialLinks({super.key});
 
@@ -242,6 +240,7 @@ class SocialLinks extends StatelessWidget {
   }
 }
 
+// Widget for the navigation bar
 class NavBar extends StatelessWidget {
   final double? minExtent;
   final bool reachedTop;
@@ -264,29 +263,28 @@ class NavBar extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {},
-            child: Text('Home'),
+            child: const Text('Home'),
           ),
           TextButton(
             onPressed: () {},
-            child: Text('Products'),
+            child: const Text('Products'),
           ),
           TextButton(
             onPressed: () {},
-            child: Text('Profile'),
+            child: const Text('Profile'),
           ),
-          Expanded(child: SizedBox.expand()),
-          // Contact us button
+          const Spacer(),
           SizedBox(
             height: double.infinity,
             width: 150,
             child: FilledButton(
               onPressed: () {},
               style: FilledButton.styleFrom(
-                shape: reachedTop ? RoundedRectangleBorder() : null,
+                shape: reachedTop ? const RoundedRectangleBorder() : null,
               ),
-              child: Text('Contact Us'),
+              child: const Text('Contact Us'),
             ),
-          )
+          ),
         ],
       ),
     );

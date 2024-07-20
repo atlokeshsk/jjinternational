@@ -17,7 +17,7 @@ class App extends StatelessWidget {
               backgroundColor: AppConstant.filledButtonBackground),
         ),
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 }

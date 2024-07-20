@@ -14,8 +14,8 @@ class MainScreen extends StatelessWidget {
             SliverPersistentHeader(
               pinned: true,
               delegate: Header(
-                  minExtend: AppConstant.minExtend,
-                  maxExtend: constraints.maxWidth < AppConstant.widthBreakPoint
+                  minExtent: AppConstant.minExtend,
+                  maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
                       ? AppConstant.minimizedMaxExtedn
                       : AppConstant.maxExtend),
             ),
