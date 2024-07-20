@@ -4,7 +4,9 @@ class AppConstant {
   // App Colors
   static const headerBackground = Color(0xFFF4F9FF);
   static const iconBorder = Color(0xFFEAEBEE);
-  static const filledButtonBackground = Color(0xFF1AA91B);
+  static const filledButtonBackground = primaryColor;
+  static const primaryColor = Color(0xFF1AA91B);
+  static const pageBannerBackground = Color(0xFFE8FFE7);
 
   // App Assets
   static const assets = 'assets';

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jjinternational/components/components.dart';
 import 'package:jjinternational/constants/constants.dart';
+import 'package:jjinternational/providers/providers.dart';
+import 'package:jjinternational/screens/screens.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -21,9 +24,19 @@ class MainScreen extends StatelessWidget {
             ),
             //TODO: ADD BODY CONTENT HERE.
             SliverFillRemaining(
-              child: Container(
-                color: Colors.blue,
-                height: 600,
+              child: Consumer<NavigationProvider>(
+                builder: (context, value, child) {
+                  switch (value.currentPage) {
+                    case Screen.home:
+                      return const HomeScreen();
+                    case Screen.product:
+                      return const ProductScreen();
+                    case Screen.profile:
+                      return const ProfileScreen();
+                    case Screen.contact:
+                      return const ContactUsScreen();
+                  }
+                },
               ),
             )
           ],
