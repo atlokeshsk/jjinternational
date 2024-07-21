@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jjinternational/components/components.dart';
 import 'package:jjinternational/constants/constants.dart';
@@ -165,6 +166,8 @@ class _ContactFormState extends State<ContactForm> {
   final messgeController = TextEditingController();
   final productController = TextEditingController();
 
+  bool isSubmitting = false;
+
   String? emptyFieldValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'field is required';
@@ -244,13 +247,40 @@ class _ContactFormState extends State<ContactForm> {
             width: double.infinity,
             height: 50,
             child: FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('We Will Contact You Shortly'),
-                    ),
-                  );
+                  setState(() {
+                    isSubmitting = true;
+                  });
+                  try {
+                    await FirebaseFirestore.instance
+                        .collection('customers')
+                        .add({
+                      'firstname': firstNameController.text,
+                      'lastname': lastNameController.text,
+                      'phone': phoneController.text,
+                      'email': emailController.text,
+                      'address': addressController.text,
+                      'product': productController.text,
+                      'message': messgeController.text,
+                    });
+                    setState(() {
+                      isSubmitting = false;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('We Will Contact You Shortly'),
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3292748525.
+                        backgroundColor: Theme.of(context).colorScheme.error,
+                        content: const Text('We Will Contact You Shortly'),
+                      ),
+                    );
+                  }
                 }
               },
               child: const Text('Submit'),
@@ -259,5 +289,18 @@ class _ContactFormState extends State<ContactForm> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:3963183076.
+    firstNameController.dispose();
+    lastNameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    addressController.dispose();
+    messgeController.dispose();
+    productController.dispose();
+    super.dispose();
   }
 }
