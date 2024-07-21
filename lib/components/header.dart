@@ -39,7 +39,8 @@ class Header extends SliverPersistentHeaderDelegate {
                 ),
               )
             : const NavBar(
-                reachedTop: true); // Return a minimal NavBar if scrolled up
+                reachedTop: true,
+              ); // Return a minimal NavBar if scrolled up
       },
     );
   }
