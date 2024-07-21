@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jjinternational/components/components.dart';
 import 'package:jjinternational/constants/constants.dart';
 import 'package:jjinternational/models/models.dart';
 
@@ -67,7 +66,7 @@ class FooterCard extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
 
         ClipRRect(
           borderRadius: BorderRadius.circular(100.0),

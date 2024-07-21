@@ -26,10 +26,10 @@ class ProductScreen extends StatelessWidget {
               tagline: 'Quality Product You Can Trust',
             ),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: ProductGrid(),
           ),
-          SliverToBoxAdapter(
+          const SliverToBoxAdapter(
             child: Footer(),
           )
         ],

@@ -21,7 +21,7 @@ class Header extends SliverPersistentHeaderDelegate {
                 color: AppConstant.headerBackground,
                 child: Center(
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 1009),
+                    constraints: const BoxConstraints(maxWidth: 1300),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Column(
