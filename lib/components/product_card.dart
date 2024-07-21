@@ -5,9 +5,15 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: const Text('H'),
+    return Center(
+      child: ConstrainedBox(
+        constraints:
+            const BoxConstraints(minWidth: 250, maxWidth: 250, minHeight: 300),
+        child: Container(
+          color: Colors.red,
+          child: const Text('H'),
+        ),
+      ),
     );
   }
 }
