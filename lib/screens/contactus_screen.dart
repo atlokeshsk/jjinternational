@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:jjinternational/components/components.dart';
 import 'package:jjinternational/constants/constants.dart';
@@ -244,13 +245,32 @@ class _ContactFormState extends State<ContactForm> {
             width: double.infinity,
             height: 50,
             child: FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('We Will Contact You Shortly'),
-                    ),
-                  );
+                  try {
+                    await FirebaseFirestore.instance
+                        .collection('customers')
+                        .add(<String, String>{
+                      'firstname': firstNameController.text,
+                      'lastname': lastNameController.text,
+                      'phone': phoneController.text,
+                      'email': emailController.text,
+                      'address': addressController.text,
+                      'product': productController.text,
+                      'message': messgeController.text,
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('We Will Contact You Shortly'),
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Something Went Wrong'),
+                      ),
+                    );
+                  }
                 }
               },
               child: const Text('Submit'),
