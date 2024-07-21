@@ -8,7 +8,6 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      print(constraints.maxWidth);
       return Container(
         color: AppConstant.pageBannerBackground,
         child: Padding(

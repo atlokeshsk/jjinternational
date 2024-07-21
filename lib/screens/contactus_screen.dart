@@ -27,23 +27,40 @@ class ContactUsScreen extends StatelessWidget {
           ),
           //Contactus form
           SliverToBoxAdapter(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1000),
-                child: const Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(child: ContactInfo()),
-                      Expanded(child: ContactForm()),
-                    ],
+            child: constraints.maxWidth < 693
+                ? Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 500),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+                        child: Column(
+                          children: [
+                            ContactInfo(),
+                            SizedBox(height: 30),
+                            ContactForm(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1000),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(child: ContactInfo()),
+                            Expanded(child: ContactForm()),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
           ),
           const SliverToBoxAdapter(
             child: Footer(),

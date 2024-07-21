@@ -10,7 +10,6 @@ class ProductGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      print(constraints.maxWidth);
       return Center(
         child: SizedBox(
           width: constraints.maxWidth < 902 ? 500 : 1000,
