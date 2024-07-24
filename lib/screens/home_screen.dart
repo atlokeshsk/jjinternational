@@ -21,11 +21,14 @@ class HomeScreen extends StatelessWidget {
                     : AppConstant.maxExtend,
               ),
             ),
+            // const SliverToBoxAdapter(
+            //   child: PageBanner(
+            //     title: 'Welcome to JJ International Imports & Exports',
+            //     tagline: 'Welcome To JJ International',
+            //   ),
+            // ),
             const SliverToBoxAdapter(
-              child: PageBanner(
-                title: 'Welcome to JJ International Imports & Exports',
-                tagline: 'Welcome To JJ International',
-              ),
+              child: Carousel(),
             ),
             SliverToBoxAdapter(
               child: Center(
