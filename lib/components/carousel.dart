@@ -1,9 +1,8 @@
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
-import 'package:jjinternational/constants/constants.dart';
+import 'package:jjinternational/models/models.dart';
 
 import 'carousel_item.dart';
 
@@ -48,7 +47,7 @@ class _CarouselState extends State<Carousel> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return InfiniteCarousel.builder(
-              itemCount: kDemoImages.length,
+              itemCount: CarosuelItemData.carosuelData.length,
               controller: _controller,
               itemExtent: constraints.maxWidth,
               scrollBehavior: ScrollConfiguration.of(context).copyWith(
@@ -67,10 +66,12 @@ class _CarouselState extends State<Carousel> {
               },
               itemBuilder: (context, itemIndex, realIndex) {
                 return CarouselItem(
+                  maxWidth: constraints.maxWidth,
                   realIndex: realIndex,
                   itemIndex: itemIndex,
                   onNext: onNext,
                   onPrevious: onPrevious,
+                  carosuelItemData: CarosuelItemData.carosuelData[itemIndex],
                 );
               },
             );

@@ -1,7 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_carousel/infinite_carousel.dart';
 import 'package:jjinternational/constants/constants.dart';
 import 'package:jjinternational/providers/providers.dart';
 import 'package:jjinternational/screens/screens.dart';
