@@ -13,17 +13,13 @@ class AppConstant {
   static const logo = '$assets/logo.jpg';
 
   // Product images
-  static const products = '$assets/products';
-  static const tenderCoconut = '$products/tender-coconut.jpg';
-  static const huskedCoconut = '$products/husked-coconut.jpg';
-  static const dryCoconut = '$products/dry-coconut.jpg';
+  static const productsAssets = '$assets/products';
 
   // Certifcate images
-  static const certificates = '$assets/certificates';
-  static const appeda = '$certificates/appeda.png';
-  static const cocunutDevelopmentBoard =
-      '$certificates/coconut-development-board.png';
-  static const fssai = '$certificates/fssai.png';
+  static const certificatesAssets = '$assets/certificates';
+
+// Carsousel images
+  static const carosuelAssets = '$assets/carosuel';
 
   // SliverPersistentHeader Extend Values
   static const maxExtend = 285.0;

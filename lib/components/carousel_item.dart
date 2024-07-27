@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jjinternational/constants/constants.dart';
 import 'package:jjinternational/models/models.dart';
 
-
-
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
     super.key,
@@ -11,14 +9,15 @@ class CarouselItem extends StatelessWidget {
     required this.itemIndex,
     required this.onNext,
     required this.onPrevious,
-    required this.maxWidth, required this.carosuelItemData,
+    required this.maxWidth,
+    required this.carosuelItemData,
   });
   final int realIndex;
   final int itemIndex;
   final void Function() onNext;
   final void Function() onPrevious;
   final double maxWidth;
-final CarosuelItemData carosuelItemData;
+  final CarosuelItemData carosuelItemData;
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -49,8 +48,38 @@ final CarosuelItemData carosuelItemData;
                     size: 100,
                   ),
                 ),
-                const Expanded(
-                  child: SizedBox(),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FittedBox(
+                        child: Text(
+                          carosuelItemData.title,
+                          style: textTheme.displayLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppConstant.primaryColor,
+                          ),
+                        ),
+                      ),
+                      FittedBox(
+                        child: Text(
+                          carosuelItemData.subTitle,
+                          style: textTheme.displayMedium!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      FittedBox(
+                        fit: BoxFit.fitHeight,
+                        child: Text(
+                          carosuelItemData.content,
+                          style: textTheme.displaySmall!.copyWith(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 ClipPath(
                   clipper: CarouselImageClipper(),
@@ -62,57 +91,14 @@ final CarosuelItemData carosuelItemData;
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: kElevationToShadow[2],
                         image: DecorationImage(
-                          image: NetworkImage(carosuelItemData.imageURL),
+                          image: AssetImage(carosuelItemData.imageURL),
                           fit: BoxFit.fill,
                         ),
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-          Positioned.fill(
-            left: 160,
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    carosuelItemData.title,
-                    style: textTheme.headlineLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppConstant.primaryColor,
-                    ),
-                  ),
-                  Text(
-                    carosuelItemData.subTitle,
-                    style: textTheme.headlineLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  Text(
-                    carosuelItemData.content,
-                    style: textTheme.headlineSmall!.copyWith(),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                onPressed: onPrevious,
-                icon: const Icon(
-                  Icons.arrow_left_outlined,
-                  color: AppConstant.iconBorder,
-                  size: 100,
                 ),
-              ),
+              ],
             ),
           ),
           Positioned.fill(

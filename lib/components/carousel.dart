@@ -58,20 +58,22 @@ class _CarouselState extends State<Carousel> {
               ),
               onIndexChanged: (index) {
                 if (_selectedIndex != index) {
-                  print('index change');
                   setState(() {
                     _selectedIndex = index;
                   });
                 }
               },
               itemBuilder: (context, itemIndex, realIndex) {
-                return CarouselItem(
-                  maxWidth: constraints.maxWidth,
-                  realIndex: realIndex,
-                  itemIndex: itemIndex,
-                  onNext: onNext,
-                  onPrevious: onPrevious,
-                  carosuelItemData: CarosuelItemData.carosuelData[itemIndex],
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CarouselItem(
+                    maxWidth: constraints.maxWidth,
+                    realIndex: realIndex,
+                    itemIndex: itemIndex,
+                    onNext: onNext,
+                    onPrevious: onPrevious,
+                    carosuelItemData: CarosuelItemData.carosuelData[itemIndex],
+                  ),
                 );
               },
             );

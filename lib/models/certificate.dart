@@ -6,10 +6,17 @@ class Certificate {
   final String name;
 
   static const certificates = [
-    Certificate(imageUrl: AppConstant.appeda, name: 'Registerd under APEDA'),
     Certificate(
-        imageUrl: AppConstant.cocunutDevelopmentBoard,
+      imageUrl: '${AppConstant.certificatesAssets}/appeda.png',
+      name: 'Registerd under APEDA',
+    ),
+    Certificate(
+        imageUrl:
+            '${AppConstant.certificatesAssets}/coconut-development-board.png',
         name: 'Registered Under CDB'),
-    Certificate(imageUrl: AppConstant.fssai, name: 'Registerd under fssai'),
+    Certificate(
+      imageUrl: '${AppConstant.certificatesAssets}/fssai.png',
+      name: 'Registerd under fssai',
+    ),
   ];
 }

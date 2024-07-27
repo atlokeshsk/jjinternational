@@ -9,19 +9,19 @@ class Product {
 
   static const products = [
     Product(
-      imageUrl: AppConstant.tenderCoconut,
+      imageUrl: '${AppConstant.productsAssets}/tender-coconut.jpg',
       title: 'Export tender Coconut',
       content:
           'Tender Coconut wholesale from India to the global market with best quality which meets international standards.',
     ),
     Product(
-      imageUrl: AppConstant.huskedCoconut,
+      imageUrl: '${AppConstant.productsAssets}/husked-coconut.jpg',
       title: 'Export Fresh Coconut',
       content:
           'Fresh Organic Semi / Pooja / Fully Husked Coconut are packaged with special attention to ensure that they remain intact when reaches our clients.',
     ),
     Product(
-      imageUrl: AppConstant.dryCoconut,
+      imageUrl: '${AppConstant.productsAssets}/dry-coconut.jpg',
       title: 'Export Dry Coconut',
       content:
           'Our range of (Dry Coconut) copra is known for their high nutritive values and quality. We are offering copra at reasonable rates and quality.',
