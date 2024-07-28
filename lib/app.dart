@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jjinternational/constants/constants.dart';
-import 'package:jjinternational/providers/providers.dart';
-import 'package:jjinternational/screens/screens.dart';
-import 'package:provider/provider.dart';
+import 'package:jjinternational/router.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'JJ International',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -18,10 +17,6 @@ class App extends StatelessWidget {
           style: FilledButton.styleFrom(
               backgroundColor: AppConstant.filledButtonBackground),
         ),
-      ),
-      home: ChangeNotifierProvider(
-        create: (context) => NavigationProvider(),
-        child: const MainScreen(),
       ),
     );
   }
