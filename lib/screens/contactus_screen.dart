@@ -8,67 +8,69 @@ class ContactUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: Header(
-              minExtent: AppConstant.minExtend,
-              maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
-                  ? AppConstant.minimizedMaxExtedn
-                  : AppConstant.maxExtend,
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        return CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: Header(
+                minExtent: AppConstant.minExtend,
+                maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
+                    ? AppConstant.minimizedMaxExtedn
+                    : AppConstant.maxExtend,
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: PageBanner(
-              title: 'Welcome to JJ International Imports & Exports',
-              tagline: 'We Will Get You Shortly',
+            const SliverToBoxAdapter(
+              child: PageBanner(
+                title: 'Welcome to JJ International Imports & Exports',
+                tagline: 'We Will Get You Shortly',
+              ),
             ),
-          ),
-          //Contactus form
-          SliverToBoxAdapter(
-            child: constraints.maxWidth < 693
-                ? Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 500),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-                        child: Column(
-                          children: [
-                            ContactInfo(),
-                            SizedBox(height: 30),
-                            ContactForm(),
-                          ],
+            //Contactus form
+            SliverToBoxAdapter(
+              child: constraints.maxWidth < 693
+                  ? Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 500),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 40, horizontal: 40),
+                          child: Column(
+                            children: [
+                              ContactInfo(),
+                              SizedBox(height: 30),
+                              ContactForm(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1000),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 40, horizontal: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(child: ContactInfo()),
+                              Expanded(child: ContactForm()),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  )
-                : Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1000),
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 40, horizontal: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(child: ContactInfo()),
-                            Expanded(child: ContactForm()),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-          ),
-          const SliverToBoxAdapter(
-            child: Footer(),
-          ),
-        ],
-      );
-    });
+            ),
+            const SliverToBoxAdapter(
+              child: Footer(),
+            ),
+          ],
+        );
+      }),
+    );
   }
 }
 

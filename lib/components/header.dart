@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jjinternational/constants/constants.dart';
-import 'package:jjinternational/providers/providers.dart';
-import 'package:provider/provider.dart';
 
 class Header extends SliverPersistentHeaderDelegate {
   Header({required this.minExtent, required this.maxExtent});
@@ -266,22 +265,19 @@ class NavBar extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              Provider.of<NavigationProvider>(context, listen: false)
-                  .navigateTo(Screen.home);
+              context.goNamed('home');
             },
             child: const Text('Home'),
           ),
           TextButton(
             onPressed: () {
-              Provider.of<NavigationProvider>(context, listen: false)
-                  .navigateTo(Screen.product);
+              context.goNamed('products');
             },
             child: const Text('Products'),
           ),
           TextButton(
             onPressed: () {
-              Provider.of<NavigationProvider>(context, listen: false)
-                  .navigateTo(Screen.profile);
+              context.goNamed('profile');
             },
             child: const Text('Profile'),
           ),
@@ -291,8 +287,7 @@ class NavBar extends StatelessWidget {
             width: 150,
             child: FilledButton(
               onPressed: () {
-                Provider.of<NavigationProvider>(context, listen: false)
-                    .navigateTo(Screen.contact);
+                context.goNamed('contact-us');
               },
               style: FilledButton.styleFrom(
                 shape: reachedTop ? const RoundedRectangleBorder() : null,

@@ -7,33 +7,35 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return CustomScrollView(
-        primary: false,
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: Header(
-              minExtent: AppConstant.minExtend,
-              maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
-                  ? AppConstant.minimizedMaxExtedn
-                  : AppConstant.maxExtend,
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        return CustomScrollView(
+          primary: false,
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: Header(
+                minExtent: AppConstant.minExtend,
+                maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
+                    ? AppConstant.minimizedMaxExtedn
+                    : AppConstant.maxExtend,
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: PageBanner(
-              title: 'Welcome to JJ International Imports & Exports',
-              tagline: 'Quality Product You Can Trust',
+            const SliverToBoxAdapter(
+              child: PageBanner(
+                title: 'Welcome to JJ International Imports & Exports',
+                tagline: 'Quality Product You Can Trust',
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: ProductGrid(),
-          ),
-          const SliverToBoxAdapter(
-            child: Footer(),
-          )
-        ],
-      );
-    });
+            const SliverToBoxAdapter(
+              child: ProductGrid(),
+            ),
+            const SliverToBoxAdapter(
+              child: Footer(),
+            )
+          ],
+        );
+      }),
+    );
   }
 }

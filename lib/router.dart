@@ -11,7 +11,7 @@ final router = GoRouter(
     ),
     GoRoute(
       name: 'products',
-      path: '/product',
+      path: '/products',
       builder: (context, state) => const ProductScreen(),
     ),
     GoRoute(

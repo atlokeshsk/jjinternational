@@ -7,77 +7,81 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: Header(
-              minExtent: AppConstant.minExtend,
-              maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
-                  ? AppConstant.minimizedMaxExtedn
-                  : AppConstant.maxExtend,
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        return CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: Header(
+                minExtent: AppConstant.minExtend,
+                maxExtent: constraints.maxWidth < AppConstant.widthBreakPoint
+                    ? AppConstant.minimizedMaxExtedn
+                    : AppConstant.maxExtend,
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: PageBanner(
-              title: 'JJ International Portfolio',
-              tagline: 'Our Company Profile',
+            const SliverToBoxAdapter(
+              child: PageBanner(
+                title: 'JJ International Portfolio',
+                tagline: 'Our Company Profile',
+              ),
             ),
-          ),
-          SliverFillViewport(
-            delegate: SliverChildListDelegate(
-              [const _Poster()],
+            SliverFillViewport(
+              delegate: SliverChildListDelegate(
+                [const _Poster()],
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: ProfileBanner(),
-          ),
-          SliverToBoxAdapter(
-            child: ClipPath(
-              clipper: QuotesClipper(),
-              child: Container(
-                height: 500,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/profile/quote.jpg',
+            const SliverToBoxAdapter(
+              child: ProfileBanner(),
+            ),
+            SliverToBoxAdapter(
+              child: ClipPath(
+                clipper: QuotesClipper(),
+                child: Container(
+                  height: 500,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/profile/quote.jpg',
+                      ),
+                      fit: BoxFit.fill,
                     ),
-                    fit: BoxFit.fill,
                   ),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'The Associtated Companies are also involed in the manufacturaing of All types of client requirements for above products',
-                      textAlign: TextAlign.center,
-                      style:
-                          Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                    ),
-                    Text(
-                      '- JJ Internaional -',
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            color: Colors.white,
-                          ),
-                    )
-                  ],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'The Associtated Companies are also involed in the manufacturaing of All types of client requirements for above products',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                      ),
+                      Text(
+                        '- JJ Internaional -',
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: Colors.white,
+                            ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: Vision(),
-          ),
-          const SliverToBoxAdapter(
-            child: Footer(),
-          )
-        ],
-      );
-    });
+            const SliverToBoxAdapter(
+              child: Vision(),
+            ),
+            const SliverToBoxAdapter(
+              child: Footer(),
+            )
+          ],
+        );
+      }),
+    );
   }
 }
 
