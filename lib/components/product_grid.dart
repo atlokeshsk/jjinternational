@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:jjinternational/components/components.dart';
 import 'package:jjinternational/models/models.dart';
 
@@ -16,14 +17,15 @@ class ProductGrid extends StatelessWidget {
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: constraints.maxWidth < 902 ? 2 : 3,
-              mainAxisExtent: 440,
+              mainAxisExtent: 480,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
             ),
             itemBuilder: (context, index) {
-              return ProductCard(product: Product.products[index % 3]);
+              final product = Product.products[index];
+              return ProductCard(product: product);
             },
-            itemCount: 6,
+            itemCount: Product.products.length,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
           ),

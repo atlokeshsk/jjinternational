@@ -24,5 +24,10 @@ final router = GoRouter(
       path: '/contact-us',
       builder: (context, state) => const ContactUsScreen(),
     ),
+    GoRoute(
+      name: 'coconut',
+      path: '/products/coconut',
+      builder: (context, state) => CoconutDetailScreen(),
+    )
   ],
 );
