@@ -28,7 +28,7 @@ class _ProductCardState extends State<ProductCard> {
       },
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => context.goNamed(widget.product.detailScreen),
+        onTap: () => context.go('/products/${widget.product.detailScreen}'),
         child: Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(

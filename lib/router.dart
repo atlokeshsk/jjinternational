@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:jjinternational/models/models.dart';
 import 'package:jjinternational/screens/screens.dart';
 
 final router = GoRouter(
@@ -25,9 +26,16 @@ final router = GoRouter(
       builder: (context, state) => const ContactUsScreen(),
     ),
     GoRoute(
-      name: 'coconut',
-      path: '/products/coconut',
-      builder: (context, state) => CoconutDetailScreen(),
+      path: '/products/:product',
+      builder: (context, state) {
+        final productName = state.pathParameters["product"]!;
+        final product = Product.products.firstWhere(
+          (product) => product.detailScreen == productName,
+        );
+        return ProductDetailScreen(
+          product: product,
+        );
+      },
     )
   ],
 );
