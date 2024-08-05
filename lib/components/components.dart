@@ -5,3 +5,4 @@ export 'product_grid.dart';
 export 'footer.dart';
 export 'customformfield.dart';
 export 'carousel.dart';
+export 'product_detail_item.dart';
