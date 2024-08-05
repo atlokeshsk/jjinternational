@@ -6,6 +6,11 @@ final router = GoRouter(
   initialLocation: '/home',
   routes: [
     GoRoute(
+      
+      path: '/',
+      builder: (context, state) => const HomeScreen(),
+    ),
+    GoRoute(
       name: 'home',
       path: '/home',
       builder: (context, state) => const HomeScreen(),
