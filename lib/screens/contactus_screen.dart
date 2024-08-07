@@ -24,7 +24,7 @@ class ContactUsScreen extends StatelessWidget {
             const SliverToBoxAdapter(
               child: PageBanner(
                 title: 'Welcome to JJ International Imports & Exports',
-                tagline: 'We Will Get You Shortly',
+                tagline: 'We Will Contact Get You Shortly',
               ),
             ),
             //Contactus form
@@ -107,7 +107,7 @@ class ContactInfo extends StatelessWidget {
                 )),
                 padding: const EdgeInsets.all(20.0),
               ),
-              label: const Text('+91 6383226912'),
+              label: const Text(phoneNumber),
               icon: const Icon(Icons.call),
             ),
           ),
@@ -123,14 +123,14 @@ class ContactInfo extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
               ),
               onPressed: () {},
-              label: const Text('atlokeshsk@icloud.com'),
+              label: const Text(email),
               icon: const Icon(Icons.mail),
             ),
           ),
           const SizedBox(height: 15),
           SizedBox(
             width: 300,
-            height: 40,
+            height: 60,
             child: OutlinedButton.icon(
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -141,7 +141,10 @@ class ContactInfo extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
               ),
               onPressed: () {},
-              label: const Text('725 Mahatham Gandhi Nagar'),
+              label: const Text(
+                address,
+                overflow: TextOverflow.visible,
+              ),
               icon: const Icon(Icons.location_on),
             ),
           ),
@@ -189,7 +192,6 @@ class _ContactFormState extends State<ContactForm> {
               // firstname.
               Expanded(
                 child: CustomFormField(
-                  label: 'atlokesh',
                   fieldName: 'FirstName:',
                   controller: firstNameController,
                   textInputType: TextInputType.name,
@@ -202,7 +204,6 @@ class _ContactFormState extends State<ContactForm> {
               //lastname
               Expanded(
                 child: CustomFormField(
-                  label: 'sk',
                   fieldName: 'LastName:',
                   controller: lastNameController,
                   textInputType: TextInputType.name,
@@ -212,33 +213,28 @@ class _ContactFormState extends State<ContactForm> {
             ],
           ),
           CustomFormField(
-            label: '+91 6383226912',
             fieldName: 'Phone:',
             controller: phoneController,
             textInputType: TextInputType.phone,
             validator: emptyFieldValidator,
           ),
           CustomFormField(
-            label: 'atlokeshsk@icloud.com',
             fieldName: 'Email:',
             controller: emailController,
             textInputType: TextInputType.emailAddress,
             validator: emptyFieldValidator,
           ),
           CustomFormField(
-            label: '123 church street',
             fieldName: 'Address:',
             controller: addressController,
             textInputType: TextInputType.streetAddress,
           ),
           CustomFormField(
-            label: 'coconut',
             fieldName: 'Product:',
             controller: productController,
             textInputType: TextInputType.text,
           ),
           CustomFormField(
-            label: 'comments',
             fieldName: 'Comment or Message:',
             controller: messgeController,
             textInputType: TextInputType.text,

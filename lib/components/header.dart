@@ -82,13 +82,13 @@ class TitleBar extends StatelessWidget {
                     children: [
                       ContactInfo(
                         title: 'Email',
-                        content: 'atlokeshsk@icloud.com',
+                        content: email,
                         iconData: Icons.email,
                       ),
                       SizedBox(width: 10),
                       ContactInfo(
                         title: 'Mobile',
-                        content: '+91 6383226912',
+                        content: phoneNumber,
                         iconData: Icons.phone,
                       ),
                       SizedBox(width: 10),
@@ -109,13 +109,13 @@ class TitleBar extends StatelessWidget {
                 const SizedBox(width: 10),
                 const ContactInfo(
                   title: 'Email',
-                  content: 'atlokeshsk@icloud.com',
+                  content: email,
                   iconData: Icons.email,
                 ),
                 const SizedBox(width: 10),
                 const ContactInfo(
                   title: 'Mobile',
-                  content: '+91 6383226912',
+                  content: phoneNumber,
                   iconData: Icons.phone,
                 ),
                 const SizedBox(width: 10),
@@ -154,7 +154,7 @@ class CompanyInfo extends StatelessWidget {
             fit: BoxFit.fill,
           ),
           Text(
-            'Cocunt Seller India',
+            companyName,
             style: textTheme.headlineSmall!.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -164,7 +164,7 @@ class CompanyInfo extends StatelessWidget {
             style: textTheme.bodyMedium,
           ),
           Text(
-            'GSTIN:29BREPK4543A1Z1',
+            'GSTIN: $gst',
             style: textTheme.bodyMedium,
           ),
         ],

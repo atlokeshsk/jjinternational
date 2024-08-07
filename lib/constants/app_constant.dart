@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+const email = 'jjinternationalsltd@gmail.com';
+const phoneNumber = '+91 90803 77016';
+const companyName = 'JJ Internationl';
+const gst = '29BREPK4543A1Z1';
+const address = '27/A6 1st Street, Ponmuthu Nagar, Nallur, Tirupur';
+
 class AppConstant {
   // App Colors
   static const headerBackground = Color(0xFFF4F9FF);

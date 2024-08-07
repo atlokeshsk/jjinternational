@@ -6,13 +6,11 @@ class CustomFormField extends StatelessWidget {
     required this.fieldName,
     required this.controller,
     required this.textInputType,
-    required this.label,
     this.validator,
   });
   final String fieldName;
   final TextEditingController controller;
   final TextInputType textInputType;
-  final String label;
   final FormFieldValidator<String>? validator;
 
   @override
@@ -33,7 +31,6 @@ class CustomFormField extends StatelessWidget {
           controller: controller,
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            label: Text(label),
             labelStyle:
                 textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w300),
             floatingLabelBehavior: FloatingLabelBehavior.never,

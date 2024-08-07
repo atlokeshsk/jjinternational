@@ -14,9 +14,9 @@ class Certificate {
         imageUrl:
             '${AppConstant.certificatesAssets}/coconut-development-board.png',
         name: 'Registered Under CDB'),
-    Certificate(
-      imageUrl: '${AppConstant.certificatesAssets}/fssai.png',
-      name: 'Registerd under fssai',
-    ),
+    // Certificate(
+    //   imageUrl: '${AppConstant.certificatesAssets}/fssai.png',
+    //   name: 'Registerd under fssai',
+    // ),
   ];
 }
